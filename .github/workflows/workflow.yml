@@ -3,7 +3,6 @@ name: Deploy Nginx to Kubeadm Cluster on GCP
 on:
   push
   pull_request
-  workflow_dispatch:
 
 jobs:
   build-and-deploy:
