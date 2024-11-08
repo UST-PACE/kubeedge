@@ -1,4 +1,4 @@
-name: Deploy to Kubeadm Cluster on GCP
+name: Deploy Nginx to Kubeadm Cluster on GCP
 
 on:
   push:
@@ -26,11 +26,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/myapp:latest .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/nginx-app:latest .
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/nginx-app:latest
 
       - name: Set up Kubeconfig
         env:
@@ -39,7 +39,11 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $KUBECONFIG
           chmod 600 $KUBECONFIG
 
-      - name: Deploy to Kubernetes
+      - name: Apply Nginx Deployment to Kubernetes
         run: |
-          kubectl set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_USERNAME }}/myapp:latest
-          kubectl rollout status deployment/myapp-deployment
+          kubectl apply -f nginx-deployment.yml
+          
+      - name: Update Nginx Image in Kubernetes Deployment
+        run: |
+          kubectl set image deployment/nginx-deployment nginx=${{ secrets.DOCKER_USERNAME }}/nginx-app:latest
+          kubectl rollout status deployment/nginx-deployment
