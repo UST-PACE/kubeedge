@@ -2,7 +2,6 @@ name: Deploy Nginx to Kubeadm Cluster on GCP
 
 on:
   push
-  pull_request
 
 jobs:
   build-and-deploy:
