@@ -28,6 +28,10 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
 
+ # Optional Debug Step: List the build directory to verify the JAR is created
+    - name: List build directory
+      run: ls -R build # Optional Debug Step: List the build directory to verify the JAR is created
+      
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
