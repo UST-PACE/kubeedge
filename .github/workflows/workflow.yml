@@ -2,9 +2,9 @@ name: Deploy to Kubeadm Cluster on GCP
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "LayaMoorthy-170673-patch-1" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "LayaMoorthy-170673-patch-1" ]
   workflow_dispatch:
 
 jobs:
