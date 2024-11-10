@@ -15,22 +15,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
+      - name: Set up Go and Build & Push Docker Image
+        uses: actions/setup-go@v4  # Set up Go environment
         with:
+          go-version: '1.19'       # Adjust this to your Go version
+
+      - name: Build Application
+        run: |
+          make all                 # Build the Go binary
+          make docker 
+
+      - name: Build and Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v4
+        with:
+          image: layamoorthy170673/demo-app
+          registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build Docker image
-        run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/myapp:latest .
-
-      - name: Push Docker image
-        run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
 
       - name: Set up Kubeconfig
         env:
