@@ -59,6 +59,7 @@ jobs:
           namespace: default
           manifests: |
             nginx.yaml
+            args: --validate=false
            
 
       # - name: Set up Kubectl
