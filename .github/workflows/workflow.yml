@@ -44,7 +44,6 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          curl https://10.128.0.34:6443
           telnet 10.128.0.34 6443
           ping 10.128.0.34 6443
           systemctl status kube-apiserver
