@@ -25,6 +25,7 @@ jobs:
 
       - name: Build Application
         run: |
+          cd ./kubeedge-counter-demo/web-controller-app
           make all                 # Build the Go binary
           make docker 
 
