@@ -34,18 +34,23 @@ jobs:
       #     cat Makefile
       #     make docker
    
-      # - name: Set up Kubeconfig
-      #  # env:
-      #  #   KUBECONFIG: $HOME/.kube/config
-      #   run: |
-      #     mkdir -p $HOME/.kube  
-      #     echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ${HOME}/.kube/config
-      #     chmod 600 ${HOME}/.kube/config
+      - name: Set up Kubeconfig
+       # env:
+       #   KUBECONFIG: $HOME/.kube/config
+        run: |
+          mkdir -p $HOME/.kube  
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ${HOME}/.kube/config
+          chmod 600 ${HOME}/.kube/config
       - name: Kubernetes Set Context
         uses: Azure/k8s-set-context@v3.0
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl get nodes
+
+      - name: Deploy K8s Application
+  # You may pin to the exact commit or the version.
+  # uses: explorium-ai/deploy-k8s-action@6e2ace05df2f8655c64718c43fb5e5e6fd8a0ad9
+        uses: explorium-ai/deploy-k8s-action@v0.1.1
+      # - name: Deploy to Kubernetes
+        # run: |
+        #   kubectl get nodes
 
         #  kubectl set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_USERNAME }}/myapp:latest
         #  kubectl rollout status deployment/myapp-deployment
