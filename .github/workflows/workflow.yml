@@ -43,7 +43,8 @@ jobs:
           chmod 600 ${HOME}/.kube/config
       - name: Kubernetes Set Context
         uses: Azure/k8s-set-context@v3.0
-
+        with:
+          kubeconfig: ${HOME}/.kube/config
       - name: Deploy K8s Application
   # You may pin to the exact commit or the version.
   # uses: explorium-ai/deploy-k8s-action@6e2ace05df2f8655c64718c43fb5e5e6fd8a0ad9
