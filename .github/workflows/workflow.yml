@@ -23,11 +23,16 @@ jobs:
       - name: List Files for Debugging
         run: ls -R
 
-      - name: Build Application
+      - name: Build Go Application
         run: |
           cd ./kubeedge-counter-demo/web-controller-app
-          make all                 # Build the Go binary
-          make docker 
+          make all
+
+      - name: Build and Push Docker Image
+        run: |
+          cd ./kubeedge-counter-demo/web-controller-app
+          make docker
+
 
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
