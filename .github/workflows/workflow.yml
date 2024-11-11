@@ -51,7 +51,9 @@ jobs:
 
       - name: Checkout source code
         uses: actions/checkout@v3
-
+      - name: View kubectl configuration
+        run: |
+          kubectl config view --minify
       - name: Deploy to the Kubernetes cluster
         uses: azure/k8s-deploy@v1
         with:
