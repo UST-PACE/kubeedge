@@ -19,7 +19,7 @@ spec:
       hostNetwork: true
       containers:
       - name: kubeedge-pi-counter
-        image: kubeedge/kubeedge-pi-counter:v1.0.0
+        image: layamoorthy170673/kubeedge-pi-counter:v1.0.0
         imagePullPolicy: IfNotPresent
       nodeSelector:
         node-role.kubernetes.io/edge: ""

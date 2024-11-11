@@ -13,7 +13,7 @@ spec:
       - key: ''
         operator: In
         values:
-        - edge-node
+        - edge
 
 status:
   twins:

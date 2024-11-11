@@ -19,8 +19,10 @@ spec:
         node-role.kubernetes.io/master: ""
       containers:
       - name: kubeedge-counter-app
-        image: kubeedge/kubeedge-counter-app:v1.0.0
+        image: layamoorthy170673/kubeedge:v1.0.0
         imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
       tolerations:
       - key: node-role.kubernetes.io/master
         operator: Exists
@@ -30,7 +32,7 @@ spec:
         effect: NoSchedule
       restartPolicy: Always
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: kubeedge-counter
@@ -41,7 +43,7 @@ rules:
   verbs: ["get", "patch"]
 
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: kubeedge-counter-rbac
