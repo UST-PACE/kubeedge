@@ -49,7 +49,7 @@ jobs:
       - name: Deploy
         run: |
           cd kubeedge-counter-demo/crds
-          kubectl apply -f kubeedge-web-controller-app.yaml
+          kubectl apply -f kubeedge-web-controller-app.yaml  --validate=false
           
  
       # - name: Deploy to Kubernetes
