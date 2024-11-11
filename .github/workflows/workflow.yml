@@ -45,9 +45,13 @@ jobs:
         uses: Azure/k8s-set-context@v3.0
         with:
           kubeconfig: ${HOME}/.kube/config
-          run: |
-            kubectl version --client
 
+      - name: Deploy K8s Application
+        uses: explorium-ai/deploy-k8s-action@v0.1.1
+        with:
+          install_local_cluster: false
+    
+          
  
       # - name: Deploy to Kubernetes
         # run: |
