@@ -26,11 +26,8 @@ jobs:
       - name: Build Go Application
         run: |
           cd ./kubeedge-counter-demo/web-controller-app
+          make clean
           make all
-
-      - name: Build and Push Docker Image
-        run: |
-          cd ./kubeedge-counter-demo/web-controller-app
           ls -al
           cat Makefile
           make docker
