@@ -20,6 +20,9 @@ jobs:
         with:
           go-version: '1.19'       # Adjust this to your Go version
 
+      - name: List Files for Debugging
+        run: ls -R
+
       - name: Build Application
         run: |
           make all                 # Build the Go binary
