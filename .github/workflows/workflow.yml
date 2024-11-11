@@ -38,6 +38,7 @@ jobs:
         env:
           KUBECONFIG: $HOME/.kube/config
         run: |
+          mkdir -p $HOME/.kube  
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $KUBECONFIG
           chmod 600 $KUBECONFIG
 
