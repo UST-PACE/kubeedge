@@ -34,18 +34,22 @@ jobs:
       #     cat Makefile
       #     make docker
    
-      - name: Set up Kubeconfig
-       # env:
-       #   KUBECONFIG: $HOME/.kube/config
-        run: |
-          mkdir -p $HOME/.kube  
-          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ${HOME}/.kube/config
-          chmod 600 ${HOME}/.kube/config
+      # - name: Set up Kubeconfig
+      #  # env:
+      #  #   KUBECONFIG: $HOME/.kube/config
+      #   run: |
+      #     mkdir -p $HOME/.kube  
+      #     echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ${HOME}/.kube/config
+      #     chmod 600 ${HOME}/.kube/config
   
-      - uses: Azure/k8s-deploy@v1
+      - name: Set up Kubectl
+        uses: azure/k8s-set-context@v1
         with:
-          manifests: | 
-            crds/kubeedge-web-controller-app.yaml
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+      - name: Deploy
+        run: |
+          kubectl apply -f crds/kubeedge-web-controller-app.yaml
+          
  
       # - name: Deploy to Kubernetes
         # run: |
