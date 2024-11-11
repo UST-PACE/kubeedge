@@ -45,7 +45,8 @@ jobs:
         uses: Azure/k8s-set-context@v3.0
         with:
           kubeconfig: ${HOME}/.kube/config
-          kubectl version --client
+          run: |
+            kubectl version --client
 
  
       # - name: Deploy to Kubernetes
