@@ -48,8 +48,8 @@ jobs:
       #     kubeconfig: ${{ secrets.KUBECONFIG }}
       - name: Deploy
         run: |
-          ls -R
-          kubectl apply -f ../crds/kubeedge-web-controller-app.yaml
+          cd crds
+          kubectl apply -f kubeedge-web-controller-app.yaml
           
  
       # - name: Deploy to Kubernetes
