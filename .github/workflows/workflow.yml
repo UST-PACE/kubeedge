@@ -48,7 +48,7 @@ jobs:
       #     kubeconfig: ${{ secrets.KUBECONFIG }}
       - name: Deploy
         run: |
-          cd crds
+          cd kubeedge-counter-demo/crds
           kubectl apply -f kubeedge-web-controller-app.yaml
           
  
