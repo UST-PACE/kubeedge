@@ -20,8 +20,8 @@ jobs:
         with:
           go-version: '1.19'       # Adjust this to your Go version
 
-      - name: List Files for Debugging
-        run: ls -R
+    #  - name: List Files for Debugging
+    #    run: ls -R
 
       - name: Build Go Application
         run: |
@@ -31,6 +31,8 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           cd ./kubeedge-counter-demo/web-controller-app
+          ls -al
+          cat Makefile
           make docker
 
 
