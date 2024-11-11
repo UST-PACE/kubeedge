@@ -44,8 +44,6 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          telnet 10.128.0.34 6443
-          ping 10.128.0.34 6443
           systemctl status kube-apiserver
 
         #  kubectl set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_USERNAME }}/myapp:latest
