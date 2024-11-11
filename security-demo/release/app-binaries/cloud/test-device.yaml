@@ -1,9 +1,0 @@
-{
-	"added_devices": [{
-		"id": "testdevice",
-		"name": "edgedevice",
-		"description": "integrationtest",
-		"state": "online",
-		"Power_Status": "ON"
-	}]
-}

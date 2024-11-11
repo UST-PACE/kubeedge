@@ -1,1 +1,0 @@
-[zigbee2mqtt可参考github地址](https://github.com/Koenkk/zigbee2mqtt.git)
