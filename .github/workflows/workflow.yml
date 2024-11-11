@@ -41,15 +41,30 @@ jobs:
           mkdir -p $HOME/.kube  
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ${HOME}/.kube/config
           chmod 600 ${HOME}/.kube/config
-  
+
+      - name: Set the Kubernetes context
+        uses: azure/k8s-set-context@v2
+        with:
+          method: service-account
+          k8s-url: https://10.128.0.34:6443
+          k8s-secret: ${{ secrets.KUBERNETES_SECRET }}
+
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Deploy to the Kubernetes cluster
+        uses: azure/k8s-deploy@v1
+        with:
+          namespace: default
+          manifests: |
+            kubeedge-counter-demo/crds/kubeedge-web-controller-app.yaml.yaml
+           
+
       # - name: Set up Kubectl
       #   uses: azure/k8s-set-context@v1
       #   with:
       #     kubeconfig: ${{ secrets.KUBECONFIG }}
-      - name: Deploy
-        run: |
-          cd kubeedge-counter-demo/crds
-          kubectl apply -f kubeedge-web-controller-app.yaml  --validate=false
+
           
  
       # - name: Deploy to Kubernetes
