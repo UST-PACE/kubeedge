@@ -46,12 +46,11 @@ jobs:
         with:
           kubeconfig: ${HOME}/.kube/config
 
-      - name: Deploy K8s Application
-        uses: explorium-ai/deploy-k8s-action@v0.1.1
+
+      - uses: Azure/k8s-deploy@v1
         with:
-          install_local_cluster: false
-    
-          
+          manifests: | 
+            crds/kubeedge-web-controller-app.yaml
  
       # - name: Deploy to Kubernetes
         # run: |
