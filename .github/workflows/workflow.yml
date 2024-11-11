@@ -58,7 +58,7 @@ jobs:
         with:
           namespace: default
           manifests: |
-            kubeedge-counter-demo/crds/kubeedge-web-controller-app.yaml.yaml
+            kubeedge-counter-demo/crds/kubeedge-web-controller-app.yaml
            
 
       # - name: Set up Kubectl
