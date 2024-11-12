@@ -5,7 +5,7 @@ on:
     branches: [ "LayaMoorthy-170673-patch-1" ]
   pull_request:
     branches: [ "LayaMoorthy-170673-patch-1" ]
-  workflow_dispatch:
+  workflow_dispatch
 
 jobs:
   build-and-deploy:
