@@ -39,11 +39,12 @@ jobs:
         with:
           version: 'v1.31.2'  # Match your Kubernetes version if necessary
 
-      - name: Configure kubeconfig
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+      - name: Set up Kubeconfig
+
         run: |
-          echo "$KUBE_CONFIG_DATA" > $HOME/.kube/config
+          mkdir -p $HOME/.kube  
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ${HOME}/.kube/config
+          chmod 600 ${HOME}/.kube/config
 
       - name: Deploy to Kubernetes
         env:
