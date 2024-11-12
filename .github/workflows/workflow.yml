@@ -15,24 +15,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # - name: Set up Go
-      #   uses: actions/setup-go@v4  # Set up Go environment
-      #   with:
-      #     go-version: '1.19'       # Adjust this to your Go version
+      - name: Set up Go
+        uses: actions/setup-go@v4  # Set up Go environment
+        with:
+          go-version: '1.19'       # Adjust this to your Go version
 
-    #  - name: List Files for Debugging
-    #    run: ls -R
-      # - name: Docker Login
-      #   run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: List Files for Debugging
+        run: ls -R
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # - name: Build Go Application
-      #   run: |
-      #     cd ./kubeedge-counter-demo/web-controller-app
-      #     make clean
-      #     make all
-      #     #ls -al
-      #     cat Makefile
-      #     make docker
+      - name: Build Go Application
+        run: |
+          cd ./kubeedge-counter-demo/web-controller-app
+          make clean
+          make all
+          #ls -al
+          cat Makefile
+          make docker
+          cd ../counter-mapper
+          make clean
+          make all
+          ls -al
+          cat Makefile
+          make docker
+          
 
       - name: Set up kubectl
         uses: azure/setup-kubectl@v3
@@ -51,6 +58,8 @@ jobs:
           K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
         run: |
           kubectl apply -f nginx.yaml --validate=false --insecure-skip-tls-verify
+          kubectl apply -f kubeedge-web-controller-app.yaml --validate=false --insecure-skip-tls-verify
+          kubectl apply -f kubeedge-pi-counter-app.yaml --validate=false --insecure-skip-tls-verify
         
       # - name: Set up Kubeconfig
 
