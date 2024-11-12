@@ -21,7 +21,7 @@ status:
       desired:
         metadata:
           type: string
-        value: 'OFF'
+        value: 'ON'
       reported:
         metadata:
           type: string
