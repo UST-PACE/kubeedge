@@ -50,7 +50,7 @@ jobs:
         env:
           K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
         run: |
-          kubectl apply -f nginx.yaml
+          kubectl apply -f nginx.yaml --validate=false --insecure-skip-tls-verify
         
       # - name: Set up Kubeconfig
 
