@@ -5,7 +5,7 @@ on:
     branches: [ "LayaMoorthy-170673-patch-1" ]
   pull_request:
     branches: [ "LayaMoorthy-170673-patch-1" ]
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
@@ -34,22 +34,22 @@ jobs:
       #     cat Makefile
       #     make docker
 
-    - name: Set up kubectl
-      uses: azure/setup-kubectl@v3
-      with:
-        version: 'v1.31.2'  # Match your Kubernetes version if necessary
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.31.2'  # Match your Kubernetes version if necessary
 
-    - name: Configure kubeconfig
-      env:
-        KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
-      run: |
-        echo "$KUBE_CONFIG_DATA" > $HOME/.kube/config
+      - name: Configure kubeconfig
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
+        run: |
+          echo "$KUBE_CONFIG_DATA" > $HOME/.kube/config
 
-    - name: Deploy to Kubernetes
-      env:
-        K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
-      run: |
-        kubectl apply -f nginx.yaml
+      - name: Deploy to Kubernetes
+        env:
+          K8S_TOKEN: ${{ secrets.K8S_TOKEN }}
+        run: |
+          kubectl apply -f nginx.yaml
         
       # - name: Set up Kubeconfig
 
